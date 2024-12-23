@@ -34,8 +34,10 @@ function MainContent() {
 }
 
 function Footer(){
+    const now = new Date();
+    const year = now.getFullYear();
     return (
-        <p>Tous droits réservés - Adarrab Mohammed Amine</p>
+        <p>© {year} - Mohammed Amine Adarrab, Tous droits réservés.</p>
     )
 }
 
