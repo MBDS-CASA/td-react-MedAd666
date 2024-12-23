@@ -5,16 +5,96 @@ import './App.css'
 import image from './assets/EMSI.png'; // Ajustez le chemin selon votre structure de dossiers
 import data from "/home/adarrab/td-react-MedAd666/data.json"
 
+const buttonStyle = {
+    padding: '10px 20px',
+    margin: '10px 0',
+    backgroundColor: '#007BFF',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    textDecoration: 'none',
+};
+
+const popupStyle = {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    borderRadius: '2%',
+    transform: 'translate(-50%, -50%)',
+    padding: '20px',
+    backgroundColor: 'purple',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+    zIndex: 1000,
+    width: '23%',
+    height: '25%',
+    overflowY: 'auto'
+};
+
+function Menu() {
+    const [popupContent, setPopupContent] = useState('');
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    const [item, setItem] = useState(getRandomItem(data));
+    const handleRandomize = () => {
+        const randomItem = getRandomItem(data);
+        setItem(randomItem);
+    };
+
+    const handleLinkClick = (content) => {
+        setPopupContent(content);
+        setIsPopupOpen(true);
+    };
+
+    const closePopup = () => {
+        setIsPopupOpen(false);
+    };
+
+    return (
+        <>
+            <nav style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                padding: '30px',
+                boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
+            }}>
+                <ul style={{
+                    listStyleType: 'none',
+                    padding: 0,
+                    margin: 0,
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                }}>
+                    <li style={{ marginRight: '20px' }}><a href="#notes" style={buttonStyle} onClick={() => handleLinkClick(`${item.grade}`)}>Notes</a></li>
+                    <li style={{ marginRight: '20px' }}><a href="#students" style={buttonStyle} onClick={() => handleLinkClick(`${item.student.firstname} ${item.student.lastname}`)}>Etudiants</a></li>
+                    <li style={{ marginRight: '20px' }}><a href="#subjects" style={buttonStyle} onClick={() => handleLinkClick(`${item.course}`)}>Matières</a></li>
+                    <li style={{ marginRight: '20px' }}><a href="#about" style={buttonStyle} onClick={() =>  handleLinkClick(`${item.student.firstname} ${item.student.lastname} - Grade: ${item.grade} - Course: ${item.course}`)}>A propos</a></li>
+                </ul>
+            </nav>
+            {isPopupOpen && (
+                <div style={popupStyle}>
+                    <h2>Informations</h2>
+                    <p>{popupContent}</p>
+                    <button onClick={closePopup}>Close</button>
+                </div>
+            )}
+        </>
+    );
+}
 
 
-function Header(){
-  return (
-      <header>
-          <img src={image} style={{ width: '400px' }} />;
-          <h1>Introduction à React</h1>
-          <h2>A la découverte des premières notions de React</h2>
-      </header>
-  )
+
+
+function Header() {
+    return (
+        <header>
+            <img src={image} style={{width: '400px'}}/>;
+            <h1>Introduction à React</h1>
+            <h2>A la découverte des premières notions de React</h2>
+        </header>
+    )
 }
 
 function getRandomItem(items) {
@@ -91,30 +171,16 @@ function App() {
   return (
     <>
         <div>
-
+            <br/>
+            <br/>
             <Header/>
             <MainContent/>
+            <Menu/>
             <center><RandomItem/></center>
 
-            <a href="https://vite.dev" target="_blank">
-                <img src={viteLogo} className="logo" alt="Vite logo"/>
-            </a>
-            <a href="https://react.dev" target="_blank">
-                <img src={reactLogo} className="logo react" alt="React logo"/>
-            </a>
+
         </div>
-        <h1>Vite + React + MBDS</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+        
         <Footer/>
     </>
   )
