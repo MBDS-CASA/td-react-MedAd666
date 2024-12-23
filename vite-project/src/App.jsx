@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import image from './assets/EMSI.png'; // Ajustez le chemin selon votre structure de dossiers
+import data from "/home/adarrab/td-react-MedAd666/data.json"
+
 
 
 function Header(){
@@ -14,6 +16,48 @@ function Header(){
       </header>
   )
 }
+
+function getRandomItem(items) {
+    const randomIndex = Math.floor(Math.random() * items.length);
+    return items[randomIndex];
+}
+
+function RandomItem() {
+    const [item, setItem] = useState(getRandomItem(data));
+    const handleRandomize = () => {
+        const randomItem = getRandomItem(data);
+        setItem(randomItem);
+    };
+    return (
+        <div>
+            <h2>Information sur L'Etudiant : </h2>
+            <table>
+                <tbody>
+                <tr>
+                    <td><strong>Course :</strong></td>
+                    <td>{item.course}</td>
+                </tr>
+                <tr>
+                    <td><strong>Student :</strong></td>
+                    <td>{item.student.firstname} {item.student.lastname}</td>
+                </tr>
+                <tr>
+                    <td><strong>Date :</strong></td>
+                    <td>{item.date}</td>
+                </tr>
+                <tr>
+                    <td><strong>Grade :</strong></td>
+                    <td>{item.grade}</td>
+                </tr>
+                </tbody>
+            </table>
+            <br/>
+            <button onClick={handleRandomize}>Tirer un autre élément</button>
+        </div>
+    );
+}
+
+
 
 function MainContent() {
 
@@ -46,18 +90,20 @@ function App() {
 
   return (
     <>
-      <div>
+        <div>
 
-          <Header/>
-          <MainContent/>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React + MBDS</h1>
+            <Header/>
+            <MainContent/>
+            <center><RandomItem/></center>
+
+            <a href="https://vite.dev" target="_blank">
+                <img src={viteLogo} className="logo" alt="Vite logo"/>
+            </a>
+            <a href="https://react.dev" target="_blank">
+                <img src={reactLogo} className="logo react" alt="React logo"/>
+            </a>
+        </div>
+        <h1>Vite + React + MBDS</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
