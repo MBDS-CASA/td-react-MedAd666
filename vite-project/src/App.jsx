@@ -166,24 +166,24 @@ function Footer(){
 }
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0)
 
-  return (
-    <>
-        <div>
-            <br/>
-            <br/>
-            <Header/>
-            <MainContent/>
-            <Menu/>
-            <center><RandomItem/></center>
+    return (
+        <>
+            <div>
+                <br/>
+                <br/>
+                <Header/>
+                <MainContent/>
+                <Menu/>
+                <center><RandomItem/></center>
 
 
-        </div>
-        
-        <Footer/>
-    </>
-  )
+            </div>
+
+            <Footer/>
+        </>
+    )
 }
 
 export default App
