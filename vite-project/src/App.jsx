@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import image from './assets/EMSI.png'; // Ajustez le chemin selon votre structure de dossiers
-import data from "/home/adarrab/td-react-MedAd666/data.json"
+import data from "/home/adarrab/td-react-Mohammed_Amine_Adarrab/data.json"
 
 const buttonStyle = {
     padding: '10px 20px',
